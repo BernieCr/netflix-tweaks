@@ -1,8 +1,17 @@
 # Netflix Tweaks
 
+Google Chrome Extension for a couple of Netflix tweaks:
+
 - Remove Hearing Impaired/CC parts (the stuff in [square brackets] from subtitles
 - Remove ♪lyrics♪ from subtitles
 - Keep the credits rolling in full screen
+
+<br/>
+
+### Installation
+
+Install the extension from the Chrome Web Store:<br/>
+https://chrome.google.com/webstore/detail/netflix-tweaks/bdfekokoflbjbmdbpidnaechcechkbbg
 
 <br/>
 
