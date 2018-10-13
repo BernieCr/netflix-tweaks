@@ -1,19 +1,27 @@
 (function() {
 
-    console.log('We we are Netflixed');
-    
-    const removeCCSubs = true;
-    const removeMusicSubs = true;
-    const postplayFullscreen = true;
+    const extensionName = 'Netflix Tweaks extension';
+    console.log(extensionName + ' - loaded');
+
+    const optionIds = ['removeCCSubs', 'removeMusicSubs', 'postplayFullscreen'];
+    const options = {};
+
+    chrome.storage.local.get(optionIds, result => {
+        optionIds.forEach(optionId => {
+            const active = result[optionId] !== 'no';
+            options[optionId] = active;
+            console.log(extensionName + ' - ' + optionId + ':', active);
+        });
+    });
 
     function callback(mutationsList) {
-        if (removeCCSubs || removeMusicSubs) {
+        if (options['removeCCSubs'] || options['removeMusicSubs']) {
             const subs = document.querySelectorAll('.player-timedtext-text-container *');
             if (subs) {
                 subs.forEach(sub => {
                     const before = sub.innerHTML;
                     let after = before;
-                    if (removeCCSubs) {
+                    if (options['removeCCSubs']) {
                         after = before
                             .replace(/\[.*]/g, "")
                             .replace(/^\[.*/g, "")
@@ -22,7 +30,7 @@
                             .replace(/<br>$/g, "")
                             .replace(/^-$/g, "");
                     }
-                    if (removeMusicSubs) {
+                    if (options['removeMusicSubs']) {
                         if (after && after.charCodeAt(0) == 0x266a) {
                             after = "";
                         }
@@ -31,21 +39,21 @@
                         }
                     }
                     if (before != after) {
-                        console.log(before, " => ", after);
+                        console.log(extensionName, ' - replacing subtitle: ', before, " => ", after);
                         sub.innerHTML = after;
                     }
                 });
             }
         }
 
-        if (postplayFullscreen) {
+        if (options['postplayFullscreen']) {
             const postplay = document.querySelector('.postplay video');
             if (postplay) {
                 postplay.click();
-                console.log("Postplay!");
+                console.log(extensionName + ' - hiding postplay (promo instead of credits)');
             }
         }
-    };
+    }
 
     var observer = new MutationObserver(callback);
     observer.observe(document.body, { subtree: true, attributes: false, childList: true });
