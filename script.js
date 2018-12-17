@@ -23,12 +23,14 @@
                     let after = before;
                     if (options['removeCCSubs']) {
                         after = before
-                            .replace(/\[.*]/g, "")
+                            .replace(/\[.*?]/g, "")
                             .replace(/^\[.*/g, "")
                             .replace(/.*]$/g, "")
                             .trim()
                             .replace(/<br>$/g, "")
-                            .replace(/^-$/g, "");
+                            .replace(/^-$/g, "")
+                            .replace(/^<br>-$/g, "")
+                            .replace(/^-<br>$/g, "");
                     }
                     if (options['removeMusicSubs']) {
                         if (after && after.charCodeAt(0) == 0x266a) {
