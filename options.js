@@ -1,7 +1,7 @@
 
 (function() {
 
-    const optionIds = ['removeCCSubs', 'removeMusicSubs', 'postplayFullscreen'];
+    const optionIds = ['removeCCSubs', 'removeMusicSubs', 'postplayFullscreen', 'avoidPostCreditsTrailer'];
 
 
     function load() {
