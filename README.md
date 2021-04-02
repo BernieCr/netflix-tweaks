@@ -5,6 +5,7 @@ Google Chrome Extension for a couple of Netflix tweaks:
 - Remove Hearing Impaired/CC parts (the stuff in [square brackets] from subtitles
 - Remove ♪lyrics♪ from subtitles
 - Keep the credits rolling in full screen
+- Stop post-credits playback of a trailer after final episode credits
 
 <br/>
 
