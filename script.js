@@ -47,12 +47,24 @@
                 });
             }
         }
-
+        
         if (options['postplayFullscreen']) {
             const postplay = document.querySelector('.postplay video');
             if (postplay) {
                 postplay.click();
                 console.log(extensionName + ' - hiding postplay (promo instead of credits)');
+            }
+        }
+        
+        if (options['avoidPostCreditsTrailer']) {
+            const countDown = document.querySelector(".PromotedVideo");
+            if(countDown){
+                const postplay = document.querySelector('.postplay video');
+                const backToBrowse = document.querySelector('a.BackToBrowse');
+                if(!postplay && backToBrowse){
+                    backToBrowse.click();
+                    console.log(extensionName + ' - stopping trailer autoplay (trailer after final credits)');
+                }
             }
         }
     }
