@@ -3,7 +3,7 @@
     const extensionName = 'Netflix Tweaks extension';
     console.log(extensionName + ' - loaded');
 
-    const optionIds = ['removeCCSubs', 'removeMusicSubs', 'postplayFullscreen'];
+    const optionIds = ['removeCCSubs', 'removeMusicSubs', 'postplayFullscreen', 'avoidPostCreditsTrailer'];
     const options = {};
 
     chrome.storage.local.get(optionIds, result => {
