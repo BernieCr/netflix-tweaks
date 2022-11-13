@@ -32,6 +32,15 @@ function isFirefox() {
         });
     });
 
+    api.storage.onChanged.addListener(function (changes, namespace) {
+        for (let [optionId, { oldValue, newValue }] of Object.entries(changes)) {
+            const oldValueBoolean = oldValue === 'yes';
+            const newValueBoolean = newValue === 'yes';
+            console.log(extensionName + ' - ' + optionId + ': ' + oldValueBoolean + ' changed to', newValueBoolean);
+            options[optionId] = newValueBoolean;
+        }
+    });
+
     function callback(mutationsList) {
         if (options['removeCCSubs'] || options['removeMusicSubs']) {
             const subs = document.querySelectorAll('.player-timedtext-text-container *');
