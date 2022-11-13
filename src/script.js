@@ -1,3 +1,21 @@
+let api;
+
+if (isChrome()) {
+    api = chrome;
+} else if (isFirefox()) {
+    api = browser;
+}
+
+function isChrome() {
+    return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
+}
+  
+function isFirefox() {
+    return (
+        typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
+    );
+}
+
 (function() {
 
     const extensionName = 'Netflix Tweaks extension';
@@ -6,7 +24,7 @@
     const optionIds = ['removeCCSubs', 'removeMusicSubs', 'postplayFullscreen'];
     const options = {};
 
-    chrome.storage.local.get(optionIds, result => {
+    api.storage.local.get(optionIds, result => {
         optionIds.forEach(optionId => {
             const active = result[optionId] !== 'no';
             options[optionId] = active;

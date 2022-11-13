@@ -1,0 +1,29 @@
+{
+    "name": "netflix-tweaks",
+    "version": "v0.4-beta",
+    "description": "Netflix Tweaks",
+    "main": "./src/script.js",
+    "browser": {
+      "[module-name]": false   
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "webpack"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/johnnynomad/netflix-tweaks.git"
+    },
+    "author": "johnnynomad",
+    "license": "",
+    "private": true,
+    "bugs": {
+        "url": "https://github.com/johnnynomad/netflix-tweaks/issues"
+    },
+    "homepage": "https://github.com/johnnynomad/netflix-tweaks",
+    "devDependencies": {
+        "copy-webpack-plugin": "^11.0.0",
+        "webpack": "^5.75.0",
+        "webpack-cli": "^4.10.0"
+    }
+}

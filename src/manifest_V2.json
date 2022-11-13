@@ -1,0 +1,24 @@
+{
+  "name": "Netflix Tweaks",
+  "description": "A browser extension for a couple of Netflix tweaks",
+  "version": "0.4",
+  "manifest_version": 2,
+  "permissions": [
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false,
+    "browser_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.netflix.com/watch/*"
+      ],
+      "js": [
+        "script.js"
+      ]
+    }
+  ]
+}
