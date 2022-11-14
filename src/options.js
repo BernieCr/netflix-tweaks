@@ -1,3 +1,20 @@
+let api;
+
+if (isFirefox()) {
+    api = browser;
+} else if (isChrome()) {
+    api = chrome;
+}
+
+function isFirefox() {
+    return (
+        typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
+    );
+}
+
+function isChrome() {
+    return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
+}
 
 (function() {
 
@@ -5,7 +22,7 @@
 
 
     function load() {
-        chrome.storage.local.get(optionIds, function(result) {
+        api.storage.local.get(optionIds, function(result) {
             optionIds.forEach(optionId => {
                 const checked = result[optionId] !== 'no';
                 document.getElementById(optionId).checked = checked;
@@ -17,7 +34,7 @@
         const optionId = event.target.getAttribute("id");
         const checked = event.target.checked;
 
-        chrome.storage.local.set({[optionId]: checked ? 'yes' : 'no'}, function() {
+        api.storage.local.set({[optionId]: checked ? 'yes' : 'no'}, function() {
             load(); // reload
         });
     }
@@ -28,6 +45,5 @@
             element => element.addEventListener('click', save)
         );
     });
-
 
 })();

@@ -1,3 +1,21 @@
+let api;
+
+if (isFirefox()) {
+    api = browser;
+} else if (isChrome()) {
+    api = chrome;
+}
+
+function isFirefox() {
+    return (
+        typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
+    );
+}
+
+function isChrome() {
+    return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
+}
+
 (function() {
 
     const extensionName = 'Netflix Tweaks extension';
@@ -6,12 +24,21 @@
     const optionIds = ['removeCCSubs', 'removeMusicSubs', 'postplayFullscreen'];
     const options = {};
 
-    chrome.storage.local.get(optionIds, result => {
+    api.storage.local.get(optionIds, result => {
         optionIds.forEach(optionId => {
             const active = result[optionId] !== 'no';
             options[optionId] = active;
             console.log(extensionName + ' - ' + optionId + ':', active);
         });
+    });
+
+    api.storage.onChanged.addListener(function (changes, namespace) {
+        for (let [optionId, { oldValue, newValue }] of Object.entries(changes)) {
+            const oldValueBoolean = oldValue !== 'no';
+            const newValueBoolean = newValue !== 'no';
+            console.log(extensionName + ' - ' + optionId + ': ' + oldValueBoolean + ' changed to', newValueBoolean);
+            options[optionId] = newValueBoolean;
+        }
     });
 
     function callback(mutationsList) {
