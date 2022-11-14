@@ -1,19 +1,19 @@
 let api;
 
-if (isChrome()) {
-    api = chrome;
-} else if (isFirefox()) {
+if (isFirefox()) {
     api = browser;
+} else if (isChrome()) {
+    api = chrome;
 }
 
-function isChrome() {
-    return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
-}
-  
 function isFirefox() {
     return (
         typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
     );
+}
+
+function isChrome() {
+    return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
 }
 
 (function() {
@@ -34,8 +34,8 @@ function isFirefox() {
 
     api.storage.onChanged.addListener(function (changes, namespace) {
         for (let [optionId, { oldValue, newValue }] of Object.entries(changes)) {
-            const oldValueBoolean = oldValue === 'yes';
-            const newValueBoolean = newValue === 'yes';
+            const oldValueBoolean = oldValue !== 'no';
+            const newValueBoolean = newValue !== 'no';
             console.log(extensionName + ' - ' + optionId + ': ' + oldValueBoolean + ' changed to', newValueBoolean);
             options[optionId] = newValueBoolean;
         }
