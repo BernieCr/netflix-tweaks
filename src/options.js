@@ -1,19 +1,19 @@
 let api;
 
-if (isChrome()) {
-    api = chrome;
-} else if (isFirefox()) {
+if (isFirefox()) {
     api = browser;
+} else if (isChrome()) {
+    api = chrome;
 }
 
-function isChrome() {
-    return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
-}
-  
 function isFirefox() {
     return (
         typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
     );
+}
+
+function isChrome() {
+    return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
 }
 
 (function() {
@@ -45,6 +45,5 @@ function isFirefox() {
             element => element.addEventListener('click', save)
         );
     });
-
 
 })();
